@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_captin/features/auth/presentation/widgets/phone_auth_body.dart';
 
-import 'sign_in_screen.dart';
+import '../../../core/utils/app_colors.dart';
 
 class PhoneLoginScreen extends StatelessWidget {
   const PhoneLoginScreen({super.key});
@@ -9,6 +10,6 @@ class PhoneLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SignInScreen();
+    return Scaffold(backgroundColor: AppColors.white, body: PhoneAuthBody());
   }
 }
