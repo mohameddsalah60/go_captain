@@ -19,6 +19,13 @@ class AppRouter {
           builder: (context) => const PhoneLoginScreen(),
         );
 
+      case AppRoutes.otp:
+        return MaterialPageRoute(
+          builder: (context) => const Scaffold(
+            body: Center(child: Text('OTP Screen - Coming Soon')),
+          ),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (context) =>
