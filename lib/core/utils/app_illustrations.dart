@@ -1,9 +1,10 @@
-// class AppIllustrations {
-//   static const String _base = 'assets/illustrations/onboarding';
+class AppIllustrations {
+  static const String _base = 'assets/images/onboarding';
 
-//   static const String expiryTracking = '$_base/expiry_tracking.svg';
-//   static const String barcodeScanning = '$_base/barcode_scanning.svg';
-//   static const String smartNotifications = '$_base/smart_notifications.svg';
-//   static const String inventoryManagement = '$_base/inventory_management.svg';
-//   static const String stockMonitoring = '$_base/stock_monitoring.svg';
-// }
+  static const String requestRide =
+      '$_base/go_captain_onboarding_transparent.svg';
+  static const String captainArriving =
+      '$_base/go_captain_onboarding_02_captain.svg';
+  static const String rideTracking =
+      '$_base/go_captain_onboarding_03_tracking.svg';
+}

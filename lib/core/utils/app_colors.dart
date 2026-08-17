@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color mainBlue = Color(0xFF247CFF);
+  /// Official Go Captain brand palette
+  static const Color brandBlue = Color(0xFF0052FF);
+  static const Color brandYellow = Color(0xFFFFD21F);
+  static const Color brandBlueLight = Color(0xFFEEF3FF);
+  static const Color brandBlueSoft = Color(0xFFD6E4FF);
+  static const Color indicatorInactive = Color(0xFFCBDCFF);
+
+  static const Color mainBlue = Color(0xFF0052FF);
   static const Color secondary = Color(0xFF03DAC6);
   static const Color backgroundScaffold = Colors.white;
   static const Color grey = Color(0xFF757575);
