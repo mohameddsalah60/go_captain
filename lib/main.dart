@@ -3,9 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/routing/app_router.dart';
 import 'core/routing/app_routes.dart';
+import 'core/services/get_it_service.dart';
+import 'core/services/shared_preferences_singletone.dart';
 import 'core/utils/app_colors.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Prefs.init();
+  setupGetIt();
   runApp(const MyApp());
 }
 

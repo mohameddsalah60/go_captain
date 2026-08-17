@@ -1,10 +1,15 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_captin/features/onboarding/presentation/views/onboarding_view.dart';
 
+import '../../../constants.dart';
+import '../../../core/services/shared_preferences_singletone.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_images.dart';
+import '../../auth/presentation/phone_login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -14,7 +19,6 @@ class SplashScreen extends StatelessWidget {
   static const _symbolDuration = Duration(milliseconds: 700);
   static const _wordmarkDelay = Duration(milliseconds: 400);
   static const _wordmarkDuration = Duration(milliseconds: 700);
-  static const _holdBeforeNav = Duration(milliseconds: 500);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,7 @@ class SplashScreen extends StatelessWidget {
                 duration: _wordmarkDuration,
                 from: 24,
                 curve: Curves.easeOutCubic,
-                onFinish: (_) => _navigateToOnboarding(context),
+                onFinish: (_) => _excuteNaviagtion(context),
                 child: _SplashWordmark(logoWidth: logoWidth),
               ),
             ],
@@ -48,22 +52,15 @@ class SplashScreen extends StatelessWidget {
     );
   }
 
-  void _navigateToOnboarding(BuildContext context) {
-    Future<void>.delayed(_holdBeforeNav, () {
-      if (!context.mounted) return;
+  void _excuteNaviagtion(BuildContext context) {
+    bool isOnBoardingViewSeen = Prefs.getBool(kIsOnBoardingViewSeen);
+    log(isOnBoardingViewSeen.toString());
 
-      Navigator.of(context).pushReplacement(
-        PageRouteBuilder<void>(
-          pageBuilder: (context, animation, secondaryAnimation) {
-            return const OnboardingView();
-          },
-          transitionDuration: const Duration(milliseconds: 400),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(opacity: animation, child: child);
-          },
-        ),
-      );
-    });
+    if (isOnBoardingViewSeen) {
+      Navigator.pushReplacementNamed(context, PhoneLoginScreen.routeName);
+    } else {
+      Navigator.pushReplacementNamed(context, OnboardingView.routeName);
+    }
   }
 }
 

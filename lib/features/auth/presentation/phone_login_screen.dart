@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screens/sign_in_screen.dart';
+import 'sign_in_screen.dart';
 
 class PhoneLoginScreen extends StatelessWidget {
   const PhoneLoginScreen({super.key});

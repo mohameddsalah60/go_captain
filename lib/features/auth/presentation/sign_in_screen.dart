@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_captin/features/auth/presentation/widgets/auth_header.dart';
 
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_text_styles.dart';
-import '../widgets/auth_button.dart';
-import '../widgets/phone_input.dart';
-import '../widgets/terms_text.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_text_styles.dart';
+import 'widgets/auth_button.dart';
+import 'widgets/phone_input.dart';
+import 'widgets/terms_text.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
