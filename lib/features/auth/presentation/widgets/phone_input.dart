@@ -3,11 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_text_styles.dart';
 
 class PhoneInput extends StatelessWidget {
-  const PhoneInput({super.key, this.errorText});
+  const PhoneInput({super.key, this.errorText, this.onSaved});
 
   final String? errorText;
+  final void Function(String)? onSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +41,7 @@ class PhoneInput extends StatelessWidget {
                     SizedBox(width: 8.w),
                     Text(
                       '+20',
-                      style: TextStyle(
-                        fontFamily: 'Cairo',
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w700,
+                      style: AppTextStyles.w700s14.copyWith(
                         color: AppColors.black,
                       ),
                     ),
@@ -54,14 +53,13 @@ class PhoneInput extends StatelessWidget {
                 child: TextFormField(
                   textDirection: TextDirection.ltr,
                   keyboardType: TextInputType.phone,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(11),
+                  ],
+                  onChanged: onSaved,
                   textAlign: TextAlign.right,
-                  style: TextStyle(
-                    fontFamily: 'Cairo',
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.black,
-                  ),
+                  style: AppTextStyles.w600s16.copyWith(color: AppColors.black),
                   decoration: InputDecoration(
                     isDense: true,
                     border: InputBorder.none,
@@ -71,10 +69,7 @@ class PhoneInput extends StatelessWidget {
                     focusedErrorBorder: InputBorder.none,
                     hintText: 'رقم الموبايل',
                     hintTextDirection: TextDirection.rtl,
-                    hintStyle: TextStyle(
-                      fontFamily: 'Cairo',
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
+                    hintStyle: AppTextStyles.w500s15.copyWith(
                       color: AppColors.grey,
                     ),
                     contentPadding: EdgeInsets.symmetric(vertical: 14.h),
@@ -90,12 +85,7 @@ class PhoneInput extends StatelessWidget {
             padding: EdgeInsets.only(right: 8.w),
             child: Text(
               errorText!,
-              style: TextStyle(
-                fontFamily: 'Cairo',
-                fontSize: 11.sp,
-                fontWeight: FontWeight.w500,
-                color: AppColors.error,
-              ),
+              style: AppTextStyles.w500s11.copyWith(color: AppColors.error),
             ),
           ),
         ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_captin/features/onboarding/presentation/views/onboarding_view.dart';
 
 import '../../features/auth/presentation/phone_login_screen.dart';
+import '../../features/auth/presentation/terms_screen.dart';
 import '../../features/splash/presentation/splash_screen.dart';
 import 'app_routes.dart';
 
@@ -18,6 +19,9 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const PhoneLoginScreen(),
         );
+
+      case AppRoutes.terms:
+        return MaterialPageRoute(builder: (context) => const TermsScreen());
 
       case AppRoutes.otp:
         return MaterialPageRoute(

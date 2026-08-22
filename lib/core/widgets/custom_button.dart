@@ -33,7 +33,7 @@ class CustomButton extends StatelessWidget {
                 colors ??
                 [
                   AppColors.mainBlue,
-                  AppColors.mainBlue.withValues(alpha: 0.65),
+                  AppColors.mainBlue.withValues(alpha: 0.50),
                 ],
           ),
           boxShadow: [
@@ -54,7 +54,12 @@ class CustomButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.r),
             ),
           ),
-          child: Text(text, style: textStyle ?? AppTextStyles.w700s18),
+          child: Text(
+            text,
+            style:
+                textStyle ??
+                AppTextStyles.w700s18.copyWith(color: Colors.white),
+          ),
         ),
       ),
     );

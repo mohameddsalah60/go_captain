@@ -78,6 +78,11 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
   );
 
+  static TextStyle w600s12 = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w600,
+  );
+
   // Medium
   static TextStyle w500s18 = TextStyle(
     fontSize: 18.sp,
@@ -89,6 +94,11 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
   );
 
+  static TextStyle w500s15 = TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w500,
+  );
+
   static TextStyle w500s14 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
@@ -96,6 +106,11 @@ class AppTextStyles {
 
   static TextStyle w500s12 = TextStyle(
     fontSize: 12.sp,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle w500s11 = TextStyle(
+    fontSize: 11.sp,
     fontWeight: FontWeight.w500,
   );
 
