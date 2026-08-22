@@ -11,12 +11,14 @@ class CustomButton extends StatelessWidget {
     required this.text,
     this.textStyle,
     this.colors,
+    this.isLoading = false,
   });
 
   final VoidCallback? onPressed;
   final String text;
   final TextStyle? textStyle;
   final List<Color>? colors;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +38,6 @@ class CustomButton extends StatelessWidget {
                   AppColors.mainBlue.withValues(alpha: 0.50),
                 ],
           ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.mainBlue.withValues(alpha: 0.25),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
         ),
         child: ElevatedButton(
           onPressed: onPressed,
@@ -54,12 +49,33 @@ class CustomButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.r),
             ),
           ),
-          child: Text(
-            text,
-            style:
-                textStyle ??
-                AppTextStyles.w700s18.copyWith(color: Colors.white),
-          ),
+          child: isLoading
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 18.w,
+                      height: 18.h,
+                      child: const CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(width: 10.w),
+                    Text(
+                      text,
+                      style:
+                          textStyle ??
+                          AppTextStyles.w700s18.copyWith(color: Colors.white),
+                    ),
+                  ],
+                )
+              : Text(
+                  text,
+                  style:
+                      textStyle ??
+                      AppTextStyles.w700s18.copyWith(color: Colors.white),
+                ),
         ),
       ),
     );

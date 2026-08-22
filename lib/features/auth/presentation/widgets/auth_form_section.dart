@@ -10,12 +10,14 @@ class AuthFormSection extends StatelessWidget {
     super.key,
     required this.errorText,
     required this.isValid,
+    required this.isLoading,
     required this.onPhoneChanged,
     required this.onSubmit,
   });
 
   final String? errorText;
   final bool isValid;
+  final bool isLoading;
   final ValueChanged<String> onPhoneChanged;
   final VoidCallback onSubmit;
 
@@ -26,7 +28,11 @@ class AuthFormSection extends StatelessWidget {
       children: [
         PhoneInput(errorText: errorText, onSaved: onPhoneChanged),
         SizedBox(height: 24.h),
-        AuthButton(isEnabled: isValid, onPressed: onSubmit),
+        AuthButton(
+          isEnabled: isValid,
+          isLoading: isLoading,
+          onPressed: onSubmit,
+        ),
         SizedBox(height: 24.h),
         const Center(child: TermsText()),
       ],

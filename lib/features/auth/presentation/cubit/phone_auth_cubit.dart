@@ -1,9 +1,51 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../domin/repos/auth_repo.dart';
 
 part 'phone_auth_state.dart';
 
 class PhoneAuthCubit extends Cubit<PhoneAuthState> {
-  PhoneAuthCubit() : super(const PhoneAuthState());
+  PhoneAuthCubit(this.authRepo) : super(const PhoneAuthState());
+
+  final AuthRepo authRepo;
+
+  Future<void> sendOtp() async {
+    emit(
+      state.copyWith(
+        status: PhoneAuthStatus.loading,
+        isValid: false,
+        errorMessage: null,
+      ),
+    );
+
+    final result = await authRepo.sendOtp(phone: '+2${state.phoneNumber}');
+
+    result.fold(
+      (failure) {
+        final friendlyMessage = _friendlyFailureMessage(failure.errorMessage);
+        log('Failed to send OTP: ${failure.errorMessage}');
+        emit(
+          state.copyWith(
+            status: PhoneAuthStatus.failure,
+            isValid: false,
+            errorMessage: friendlyMessage,
+          ),
+        );
+      },
+      (_) {
+        log('OTP sent successfully to ${state.phoneNumber}');
+        emit(
+          state.copyWith(
+            status: PhoneAuthStatus.success,
+            isValid: true,
+            errorMessage: null,
+          ),
+        );
+      },
+    );
+  }
 
   void onPhoneChanged(String value) {
     var sanitizedPhone = value.replaceAll(RegExp(r'\D'), '');
@@ -20,15 +62,50 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
         phoneNumber: sanitizedPhone,
         isValid: validationMessage == null,
         errorMessage: validationMessage,
+        status: PhoneAuthStatus.initial,
       ),
     );
   }
 
-  void submit() {
+  Future<void> submit() async {
     final validationMessage = _validatePhone(state.phoneNumber);
     final isValid = validationMessage == null;
 
-    emit(state.copyWith(isValid: isValid, errorMessage: validationMessage));
+    if (!isValid) {
+      emit(
+        state.copyWith(
+          isValid: false,
+          errorMessage: validationMessage,
+          status: PhoneAuthStatus.failure,
+        ),
+      );
+      return;
+    }
+
+    await sendOtp();
+  }
+
+  static String _friendlyFailureMessage(String message) {
+    final normalized = message
+        .replaceAll('Exception: ', '')
+        .replaceAll('SocketException', '')
+        .replaceAll('DioException', '')
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .trim();
+
+    if (normalized.isEmpty) {
+      return 'تعذّر إرسال رمز التحقق. حاول مرة أخرى.';
+    }
+
+    if (normalized.contains('Socket') || normalized.contains('network')) {
+      return 'لا يوجد اتصال بالإنترنت. تحقق من الشبكة ثم حاول مرة أخرى.';
+    }
+
+    if (normalized.contains('timeout')) {
+      return 'انتهت مهلة الاتصال. حاول مرة أخرى بعد قليل.';
+    }
+
+    return 'تعذّر إرسال رمز التحقق. حاول مرة أخرى.';
   }
 
   static String? _validatePhone(String phoneNumber) {
