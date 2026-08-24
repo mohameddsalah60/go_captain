@@ -14,7 +14,10 @@ class TermsText extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        style: AppTextStyles.w400s14.copyWith(color: AppColors.grey),
+        style: AppTextStyles.w400s14.copyWith(
+          color: AppColors.grey,
+          fontFamily: 'Cairo',
+        ),
         children: [
           const TextSpan(text: 'بإكمالك، أنت موافق على '),
           TextSpan(
