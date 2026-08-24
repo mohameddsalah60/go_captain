@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/helpers/extinctions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../terms_screen.dart';
@@ -21,7 +22,7 @@ class TermsText extends StatelessWidget {
             style: AppTextStyles.w600s14.copyWith(color: AppColors.mainBlue),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                Navigator.pushNamed(context, TermsScreen.routeName);
+                context.pushNamed(TermsScreen.routeName);
               },
           ),
           const TextSpan(text: ' و '),
@@ -30,7 +31,7 @@ class TermsText extends StatelessWidget {
             style: AppTextStyles.w600s14.copyWith(color: AppColors.mainBlue),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                Navigator.pushNamed(context, TermsScreen.routeName);
+                context.pushNamed(TermsScreen.routeName);
               },
           ),
           const TextSpan(text: '.'),

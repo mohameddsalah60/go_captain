@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_captin/features/onboarding/presentation/views/onboarding_view.dart';
 
 import '../../../constants.dart';
+import '../../../core/helpers/extinctions.dart';
 import '../../../core/services/shared_preferences_singletone.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_images.dart';
@@ -57,9 +58,9 @@ class SplashScreen extends StatelessWidget {
     log(isOnBoardingViewSeen.toString());
 
     if (isOnBoardingViewSeen) {
-      Navigator.pushReplacementNamed(context, PhoneLoginScreen.routeName);
+      context.pushReplacementNamed(PhoneLoginScreen.routeName);
     } else {
-      Navigator.pushReplacementNamed(context, OnboardingView.routeName);
+      context.pushReplacementNamed(OnboardingView.routeName);
     }
   }
 }

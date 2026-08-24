@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_captin/core/helpers/extinctions.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_toast.dart';
@@ -32,8 +33,8 @@ class PhoneAuthBody extends StatelessWidget {
             message: 'تم إرسال رمز التحقق بنجاح.',
             isSuccess: true,
           );
-          Navigator.pushNamed(
-            context,
+
+          context.pushNamed(
             OtpScreen.routeName,
             arguments: '+2${state.phoneNumber}',
           );

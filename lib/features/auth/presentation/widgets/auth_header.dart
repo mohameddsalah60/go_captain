@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_captin/core/helpers/extinctions.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_images.dart';
@@ -18,17 +19,15 @@ class AuthHeader extends StatelessWidget {
         children: [
           if (visibleBackButton)
             IconButton(
-              onPressed: () => Navigator.maybePop(context),
+              onPressed: () => context.maybePopN(),
               icon: Icon(
                 Icons.arrow_back_ios_new_rounded,
                 size: 20.sp,
                 color: AppColors.black,
               ),
-              splashRadius: 18,
               padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
             ),
-          Image.asset(AppImages.goCaptain, height: 34.h, fit: BoxFit.contain),
+          Image.asset(AppImages.goCaptain, height: 50.h, fit: BoxFit.contain),
           if (visibleBackButton)
             SizedBox(width: 32.w), // Placeholder to balance the back button
         ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_captin/core/helpers/extinctions.dart';
 import 'package:go_captin/core/services/get_it_service.dart';
 
 import '../../../core/routing/app_routes.dart';
@@ -205,8 +206,7 @@ class _OtpScreenBodyState extends State<OtpScreenBody> {
           BlocConsumer<OtpCubit, OtpState>(
             listener: (context, state) {
               if (state.status == OtpStatus.success) {
-                // You can navigate or show success
-                Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+                context.pushReplacementNamed(AppRoutes.home);
               }
             },
             builder: (context, state) {
