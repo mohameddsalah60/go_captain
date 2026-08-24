@@ -9,7 +9,7 @@ class ApiService {
     headers: {
       "Content-Type": "application/json",
       'Authorization':
-          'Bearer sk_db3c37fb1a950f8726cec0df7b056d3c45fcb06d2bd9031cdc755fe9e6b2eb75',
+          'Bearer sk_931b227bd5b9006fc1213432723a8ae2dbdcee7820da590c0013b7f98effb816',
     },
   );
 

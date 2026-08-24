@@ -32,7 +32,11 @@ class PhoneAuthBody extends StatelessWidget {
             message: 'تم إرسال رمز التحقق بنجاح.',
             isSuccess: true,
           );
-          Navigator.pushNamed(context, OtpScreen.routeName);
+          Navigator.pushNamed(
+            context,
+            OtpScreen.routeName,
+            arguments: '+2${state.phoneNumber}',
+          );
         }
       },
       child: BlocBuilder<PhoneAuthCubit, PhoneAuthState>(

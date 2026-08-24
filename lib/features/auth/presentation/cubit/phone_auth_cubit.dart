@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domin/repos/auth_repo.dart';
+import '../../../../core/utils/error_mapper.dart';
 
 part 'phone_auth_state.dart';
 
@@ -24,7 +25,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
 
     result.fold(
       (failure) {
-        final friendlyMessage = _friendlyFailureMessage(failure.errorMessage);
+        final friendlyMessage = ErrorMapper.friendlyMessage(failure);
         log('Failed to send OTP: ${failure.errorMessage}');
         emit(
           state.copyWith(
@@ -85,28 +86,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
     await sendOtp();
   }
 
-  static String _friendlyFailureMessage(String message) {
-    final normalized = message
-        .replaceAll('Exception: ', '')
-        .replaceAll('SocketException', '')
-        .replaceAll('DioException', '')
-        .replaceAll(RegExp(r'\s+'), ' ')
-        .trim();
-
-    if (normalized.isEmpty) {
-      return 'تعذّر إرسال رمز التحقق. حاول مرة أخرى.';
-    }
-
-    if (normalized.contains('Socket') || normalized.contains('network')) {
-      return 'لا يوجد اتصال بالإنترنت. تحقق من الشبكة ثم حاول مرة أخرى.';
-    }
-
-    if (normalized.contains('timeout')) {
-      return 'انتهت مهلة الاتصال. حاول مرة أخرى بعد قليل.';
-    }
-
-    return 'تعذّر إرسال رمز التحقق. حاول مرة أخرى.';
-  }
+  // Error mapping delegated to ErrorMapper
 
   static String? _validatePhone(String phoneNumber) {
     final sanitizedPhone = phoneNumber.replaceAll(RegExp(r'\D'), '');

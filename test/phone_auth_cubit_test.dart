@@ -12,6 +12,12 @@ class FakeAuthRepo implements AuthRepo {
   @override
   Future<Either<Failure, dynamic>> sendOtp({required String phone}) async =>
       result;
+
+  @override
+  Future<Either<Failure, dynamic>> verifyOtp({
+    required String phone,
+    required String code,
+  }) async => result;
 }
 
 void main() {

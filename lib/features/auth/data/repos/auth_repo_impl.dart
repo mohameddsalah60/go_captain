@@ -21,4 +21,21 @@ class AuthRepoImpl implements AuthRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, dynamic>> verifyOtp({
+    required String phone,
+    required String code,
+  }) async {
+    try {
+      final response = await authPhoneService.verifyOtp(
+        phone: phone,
+        code: code,
+      );
+      log("verify repo response :$response");
+      return Right(response);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

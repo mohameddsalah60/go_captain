@@ -4,6 +4,7 @@ import 'package:go_captin/features/onboarding/presentation/views/onboarding_view
 import '../../features/auth/presentation/otp_screen.dart';
 import '../../features/auth/presentation/phone_login_screen.dart';
 import '../../features/auth/presentation/terms_screen.dart';
+import '../../features/home/presenation/home_screen.dart';
 import '../../features/splash/presentation/splash_screen.dart';
 import 'app_routes.dart';
 
@@ -25,7 +26,13 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => const TermsScreen());
 
       case AppRoutes.otp:
-        return MaterialPageRoute(builder: (context) => const OtpScreen());
+        return MaterialPageRoute(
+          builder: (context) => OtpScreen(phone: settings.arguments as String),
+          settings: settings,
+        );
+
+      case AppRoutes.home:
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
 
       default:
         return MaterialPageRoute(

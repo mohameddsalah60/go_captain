@@ -29,4 +29,29 @@ class AuthPhoneService {
       rethrow;
     }
   }
+
+  Future<Map<String, dynamic>> verifyOtp({
+    required String phone,
+    required String code,
+  }) async {
+    try {
+      log("verify phone :$phone, code :$code");
+      var data = await apiService.post(
+        endPoint: 'verify',
+        data: {'phone': phone, 'code': code},
+      );
+      log("verify data :$data");
+      return data;
+    } on DioException catch (e) {
+      log('STATUS CODE: ${e.response?.statusCode}');
+      log('RESPONSE DATA: ${e.response?.data}');
+      log('RESPONSE HEADERS: ${e.response?.headers}');
+      log('REQUEST URL: ${e.requestOptions.uri}');
+      log('REQUEST HEADERS: ${e.requestOptions.headers}');
+
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
